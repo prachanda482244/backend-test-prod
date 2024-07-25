@@ -12,6 +12,9 @@ app.use(urlencoded({ extended: true, limit: "20mb" }));
 app.post("/get-console-data", (req, res) => {
   res.status(200).send(req.body);
 });
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Json response", data: [], success: true });
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
