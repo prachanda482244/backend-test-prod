@@ -21,7 +21,7 @@ function verifyWebhook(data, hmacHeader) {
 }
 
 // Handle POST requests
-app.post("/webhook_compliance/shopify", (req, res) => {
+app.post("/webhook_compliance/shopify/customer-data-request", (req, res) => {
   const hmacHeader = req.get("X-Shopify-Hmac-Sha256");
   const data = req.rawBody.toString(); // Get the raw body as a string
 
@@ -29,7 +29,31 @@ app.post("/webhook_compliance/shopify", (req, res) => {
     return res.status(401).send("Unauthorized");
   }
 
-  Example: console.log("Webhook payload:", req.body);
+  console.log("Webhook received");
+  res.status(200).send("Webhook received");
+});
+
+app.post("/webhook_compliance/shopify/customer-data-erase", (req, res) => {
+  const hmacHeader = req.get("X-Shopify-Hmac-Sha256");
+  const data = req.rawBody.toString(); // Get the raw body as a string
+
+  if (!verifyWebhook(data, hmacHeader)) {
+    return res.status(401).send("Unauthorized");
+  }
+
+  console.log("Webhook received");
+
+  res.status(200).send("Webhook received");
+});
+
+app.post("/webhook_compliance/shopify/shop-data-erase", (req, res) => {
+  const hmacHeader = req.get("X-Shopify-Hmac-Sha256");
+  const data = req.rawBody.toString(); // Get the raw body as a string
+
+  if (!verifyWebhook(data, hmacHeader)) {
+    return res.status(401).send("Unauthorized");
+  }
+  console.log("Webhook received");
 
   res.status(200).send("Webhook received");
 });
