@@ -9,6 +9,7 @@ app.use(express.json()); // Parse JSON request bodies
 
 async function verifyShopifyRequest(req, res, next) {
   const hmacHeader = req.get("X-Shopify-Hmac-Sha256");
+  console.log(req.body, "request body");
 
   console.log("Received X-Shopify-Hmac-Sha256:", hmacHeader);
 
