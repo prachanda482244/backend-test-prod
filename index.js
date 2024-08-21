@@ -2,7 +2,8 @@ import express from "express";
 import crypto from "crypto";
 
 const app = express();
-const SHOPIFY_SECRET = "6d1e7a324e5bc2c0583b0ca056237a4d";
+const SHOPIFY_SECRET =
+  "6e83565daa74fc8f3d691f8c1309886e0ee4f1c722309072af0c2e149845cd3d";
 
 app.use(express.json()); // Parse JSON request bodies
 
