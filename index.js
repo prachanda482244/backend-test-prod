@@ -9,7 +9,6 @@ app.use(express.json()); // Parse JSON request bodies
 
 async function verifyShopifyRequest(req, res, next) {
   const hmacHeader = req.get("X-Shopify-Hmac-Sha256");
-  console.log(req.body, "request body");
 
   console.log("Received X-Shopify-Hmac-Sha256:", hmacHeader);
 
@@ -18,6 +17,8 @@ async function verifyShopifyRequest(req, res, next) {
   }
 
   const body = JSON.stringify(req.body); // Get the raw body as a string
+  console.log(body, "request body");
+
   const hmac = crypto
     .createHmac("sha256", SHOPIFY_SECRET)
     .update(body, "utf8")
@@ -39,7 +40,7 @@ app.get("/", verifyShopifyRequest, (req, res) => {
   res.status(200).json({ message: "OK" });
 });
 
-app.post("/webhook_compliance/shopify/", (req, res) => {
+app.post("/webhook_compliance/shopify/", verifyShopifyRequest, (req, res) => {
   console.log("Request received at webhooks");
 
   res.status(200).json({ message: "OK" });
