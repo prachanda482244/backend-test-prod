@@ -38,7 +38,7 @@ app.get("/", verifyShopifyRequest, (req, res) => {
   res.status(200).json({ message: "OK" });
 });
 
-app.post("/webhook_compliance/shopify/", verifyShopifyRequest, (req, res) => {
+app.post("/webhook_compliance/shopify/", (req, res) => {
   console.log("Request received at webhooks");
 
   res.status(200).json({ message: "OK" });
